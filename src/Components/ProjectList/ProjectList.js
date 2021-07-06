@@ -1,8 +1,13 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+
 
 const ProjectList = (props) => {
 
      const newProjectData = props.newProjectData;
+     const handleEditProject = props.handleEditProject;
+     const handleDeleteProject = props.handleDeleteProject;
 
     return (
         <div className=" d-flex justify-content-center" >
@@ -27,8 +32,18 @@ const ProjectList = (props) => {
                                 <td>{data.assign_to}</td>
                                 <td>{data.start_date}</td>
                                 <td>{data.end_date}</td>
-                                <td>Edit</td>
-                                <td>Delete</td>
+                                <td ><FontAwesomeIcon
+                                    style={{color:"blue"}}
+                                    icon={faEdit }
+                                    onClick={()=>handleEditProject(data)}
+                                    />
+                                </td>
+                                <td > <FontAwesomeIcon  
+                                    style={{color:"red"}}  
+                                    icon={faTrashAlt}
+                                    onClick={()=>handleDeleteProject(data)}
+                                    />
+                                </td>
                             </tr>
                         )
                     }

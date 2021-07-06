@@ -30,8 +30,6 @@ const ProjectHeader = () => {
     //  console.log(newProjectData);
 
 
-
-
     const handleNewProjectSubmit = (e) => {
         e.preventDefault();
         const projectData = newProjectData;
@@ -69,9 +67,11 @@ const ProjectHeader = () => {
 
 
     const [singleProject, setSingleProject] = useState(false);
+    // const [currentProject, setCurrentProject] = useState(null);
     const handleSingleProject = (e, data) => {
         e.preventDefault();
         setSingleProject(true);
+        // setCurrentProject(data.id);
         console.log("clicked: ", data);
     }
 
@@ -91,22 +91,22 @@ const ProjectHeader = () => {
     }
 
 
-    const [newTaskData, setNewTaskData] = ([]);
+    const [newTaskData, setNewTaskData] = useState([]);
     const [tempTaskData, setTempTaskData] = useState({})
     const handleNewTaskData = (e) => {
         // console.log(e.target.value);
         const { name, value } = e.target;
         setTempTaskData({...tempTaskData, [name]:value});
     }
-    console.log(tempTaskData);
-    // console.log("checked:", newTaskData);
+     console.log(tempTaskData);
+     console.log("checked:", newTaskData);
 
     const handleNewTaskSubmit = (e) => {
         e.preventDefault();
-        // const addTaskData = newTaskData
-        // addTaskData.push({...tempTaskData, id: addTaskData.length + 1 });
-        // setNewTaskData(addTaskData);
-         
+        const addTaskData = newTaskData
+        addTaskData.push({...tempTaskData, id: addTaskData.length + 1, });
+        setNewTaskData(addTaskData);
+         setNewTask(false);
     }
 
 
@@ -130,11 +130,17 @@ const ProjectHeader = () => {
                                     (
                                         <>
                                             <div className="text-center d-flex justify-content-center" >
-                                                <h2>Task List(<span style={{ color: "red" }} ></span>)  </h2>
+                                                <h2>Task List(<span style={{ color: "red" }} >{newTaskData.length}</span>)  </h2>
                                                 <button className="btn" onClick={(e) => handleNewTask(e)}  >  <FontAwesomeIcon icon={faPlus} /> <b>New Task</b></button>
 
                                             </div>
-                                            <TaskList handleBack={handleBack} ></TaskList>
+                                            <TaskList 
+                                                handleBack={handleBack}
+                                                newTaskData={newTaskData}
+                                                // currentProject={currentProject}
+                                             >
+
+                                            </TaskList>
                                         </>
                                     )
                             }

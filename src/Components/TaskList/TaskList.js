@@ -6,7 +6,10 @@ import { faEdit, faTrashAlt, faArrowAltCircleLeft } from '@fortawesome/free-soli
 const TaskList = (props) => {
 
 
-    const handleBack = props.handleBack
+    const handleBack = props.handleBack;
+    const newTaskData = props.newTaskData;
+    // const currentProject = props.currentProject;
+    // // const taskData = newTaskData.filter(data => )
 
     return (
         <div>
@@ -23,30 +26,25 @@ const TaskList = (props) => {
                             <th scope="col">Delete</th>
                         </tr>
                     </thead>
-                    {/* <tbody>
+                    <tbody>
 
                     {
-                        newProjectData.map(data =>
+                        newTaskData.map(data =>
                             <tr>
-                                <td
-                                    className="btn" 
-                                    onClick={(e)=>handleSingleProject(e,data)} 
-                                >
-                                    {data.project_name} ( )
-                                </td>
-                                <td>{data.assign_to}</td>
-                                <td>{data.start_date}</td>
-                                <td>{data.end_date}</td>
+                                <td>{data.task_name}</td>
+                                <td>{data.task_assign_to}</td>
+                                <td>{data.task_start_date}</td>
+                                <td>{data.task_end_date}</td>
                                 <td ><FontAwesomeIcon
                                     style={{color:"blue"}}
                                     icon={faEdit }
-                                    onClick={()=>handleEditProject(data)}
+                                    // onClick={()=>handleEditProject(data)}
                                     />
                                 </td>
                                 <td > <FontAwesomeIcon  
                                     style={{color:"red"}}  
                                     icon={faTrashAlt}
-                                    onClick={()=>handleDeleteProject(data)}
+                                    // onClick={()=>handleDeleteProject(data)}
                                     />
                                 </td>
                             </tr>
@@ -54,7 +52,7 @@ const TaskList = (props) => {
                     }
 
 
-                </tbody> */}
+                </tbody>
                 </table>
 
 

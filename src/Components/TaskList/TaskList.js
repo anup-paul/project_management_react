@@ -1,30 +1,29 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
 
 
-const ProjectList = (props) => {
+const TaskList = (props) => {
 
-     const newProjectData = props.newProjectData;
-     const handleEditProject = props.handleEditProject;
-     const handleDeleteProject = props.handleDeleteProject;
-     const handleSingleProject = props.handleSingleProject;
+
+    const handleBack = props.handleBack
 
     return (
-        <div className=" d-flex justify-content-center" >
-            <table class="table w-75">
-                <thead>
-                    <tr>
+        <div>
+            <div className=" d-flex justify-content-center" >
+                <table class="table w-75 border">
+                    <thead>
+                        <tr>
 
-                        <th scope="col">Project Name</th> 
-                        <th scope="col">Assign To</th>
-                        <th scope="col">Start Date</th>
-                        <th scope="col">End Date</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
+                            <th scope="col">Project Name</th>
+                            <th scope="col">Assign To</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    {/* <tbody>
 
                     {
                         newProjectData.map(data =>
@@ -55,10 +54,16 @@ const ProjectList = (props) => {
                     }
 
 
-                </tbody>
-            </table>
+                </tbody> */}
+                </table>
+
+
+            </div>
+            <div className="text-center" >
+                <button className="btn" onClick={(e)=>handleBack(e)} > <FontAwesomeIcon style={{color:"blue"}}  icon={faArrowAltCircleLeft} /> <b>Projects</b></button>
+            </div>
         </div>
     );
 };
 
-export default ProjectList;
+export default TaskList;

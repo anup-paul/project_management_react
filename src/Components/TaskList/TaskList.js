@@ -7,14 +7,18 @@ const TaskList = (props) => {
 
 
     const handleBack = props.handleBack;
+    // const singleProjectTaskData = props.singleProjectTaskData;
     const newTaskData = props.newTaskData;
-    // const currentProject = props.currentProject;
-    // // const taskData = newTaskData.filter(data => )
+    const currentProject = props.currentProject;
+    const taskData = newTaskData.filter(data => data.projectId === currentProject.id);
+
+    const handleEditTask = props.handleEditTask;
+    const handleDeleteTask = props.handleDeleteTask;
 
     return (
         <div>
-            <div className=" d-flex justify-content-center" >
-                <table class="table w-75 border">
+            <div>
+                <table class="table  border">
                     <thead>
                         <tr>
 
@@ -29,7 +33,7 @@ const TaskList = (props) => {
                     <tbody>
 
                     {
-                        newTaskData.map(data =>
+                        taskData.map(data =>
                             <tr>
                                 <td>{data.task_name}</td>
                                 <td>{data.task_assign_to}</td>
@@ -38,13 +42,13 @@ const TaskList = (props) => {
                                 <td ><FontAwesomeIcon
                                     style={{color:"blue"}}
                                     icon={faEdit }
-                                    // onClick={()=>handleEditProject(data)}
+                                    onClick={(e)=>handleEditTask(e,data)}
                                     />
                                 </td>
                                 <td > <FontAwesomeIcon  
                                     style={{color:"red"}}  
                                     icon={faTrashAlt}
-                                    // onClick={()=>handleDeleteProject(data)}
+                                    onClick={(e)=>handleDeleteTask(e,data)}
                                     />
                                 </td>
                             </tr>
@@ -55,10 +59,9 @@ const TaskList = (props) => {
                 </tbody>
                 </table>
 
-
             </div>
-            <div className="text-center" >
-                <button className="btn" onClick={(e)=>handleBack(e)} > <FontAwesomeIcon style={{color:"blue"}}  icon={faArrowAltCircleLeft} /> <b>Projects</b></button>
+            <div className="d-flex justify-content-end mt-5" >
+                <button className="btn btn-outline-primary" onClick={(e)=>handleBack(e)} > <FontAwesomeIcon   icon={faArrowAltCircleLeft} /> <b>Projects</b></button>
             </div>
         </div>
     );

@@ -11,7 +11,7 @@ const NewTaskForm = (props) => {
                 <h2 className="text-center mb-4" >Add Your New Task Data</h2>
                 <div className=" d-flex justify-content-center " >
 
-                    <form className="w-50" >
+                    <form className="w-50 border border-success border-4 p-5" >
                         <div className="mb-3">
                             <input type="text" onBlur={handleNewTaskData}  name="task_name" className="form-control" id="Task_Name101" placeholder="Task Name" />
                         </div>
@@ -27,7 +27,7 @@ const NewTaskForm = (props) => {
                         <div className="mb-3">
                             <input type="text" onBlur={handleNewTaskData}  name="task_end_date" className="form-control" id="Task_End_date105" placeholder="Task End date" />
                         </div>
-                        <button onClick={(e)=>handleNewTaskSubmit(e)}  type="submit"  className="btn btn-primary">Submit</button>
+                        <button onClick={(e)=>handleNewTaskSubmit(e)}  type="submit"  className="btn btn-outline-success">Submit</button>
                     </form>
                 </div>
             </div>

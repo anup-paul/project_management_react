@@ -11,7 +11,7 @@ const EditProjectForm = (props) => {
             <div className="mt-5 " >
                 <h2 className="text-center mb-4" >Edit Project Data</h2>
                 <div className=" d-flex justify-content-center " >
-                    <form className="w-50" >
+                    <form className="w-50 border border-success border-4 p-5" >
                         <div className="mb-3">
                             <input type="text" onChange={handleNewProjectData} value={tempProjectData.project_name} name="project_name" className="form-control" id="Project_Name101" placeholder="Project Name" />
                         </div>
@@ -27,7 +27,7 @@ const EditProjectForm = (props) => {
                         <div className="mb-3">
                             <input type="text" onChange={handleNewProjectData} value={tempProjectData.end_date} name="end_date" className="form-control" id="End_date105" placeholder="End date" />
                         </div>
-                        <button type="submit" onClick={(e) => handleSubmitEditProject(e, tempProjectData.id)} className="btn btn-primary">Submit</button>
+                        <button type="submit" onClick={(e) => handleSubmitEditProject(e, tempProjectData.id)} className="btn btn-outline-success">Submit</button>
                     </form>
                 </div>
             </div>

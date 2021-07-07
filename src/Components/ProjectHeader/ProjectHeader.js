@@ -6,6 +6,7 @@ import ProjectList from '../ProjectList/ProjectList';
 import EditProjectForm from '../EditProject/EditProjectForm';
 import TaskList from '../TaskList/TaskList';
 import NewTaskForm from '../../NewTaskForm/NewTaskForm';
+import EditTaskForm from '../EditTaskForm/EditTaskForm';
 
 const ProjectHeader = () => {
 
@@ -49,7 +50,6 @@ const ProjectHeader = () => {
 
 
 
-
     const handleSubmitEditProject = (e, id) => {
         e.preventDefault();
         const projectData = newProjectData;
@@ -67,11 +67,11 @@ const ProjectHeader = () => {
 
 
     const [singleProject, setSingleProject] = useState(false);
-    // const [currentProject, setCurrentProject] = useState(null);
+    const [currentProject, setCurrentProject] = useState(null);
     const handleSingleProject = (e, data) => {
         e.preventDefault();
         setSingleProject(true);
-        // setCurrentProject(data.id);
+        setCurrentProject(data);
         console.log("clicked: ", data);
     }
 
@@ -94,25 +94,56 @@ const ProjectHeader = () => {
     const [newTaskData, setNewTaskData] = useState([]);
     const [tempTaskData, setTempTaskData] = useState({})
     const handleNewTaskData = (e) => {
-        // console.log(e.target.value);
+        console.log(e.target.value);
         const { name, value } = e.target;
-        setTempTaskData({...tempTaskData, [name]:value});
+        setTempTaskData({ ...tempTaskData, [name]: value });
     }
-     console.log(tempTaskData);
-     console.log("checked:", newTaskData);
+    console.log(tempTaskData);
+    console.log("checked:", newTaskData);
 
+    const [singleProjectTaskData, setSingleProjectTaskData] = useState([]);
     const handleNewTaskSubmit = (e) => {
         e.preventDefault();
         const addTaskData = newTaskData
-        addTaskData.push({...tempTaskData, id: addTaskData.length + 1, });
+        addTaskData.push({ ...tempTaskData, id: addTaskData.length + 1, projectId: currentProject.id });
         setNewTaskData(addTaskData);
-         setNewTask(false);
+        // const taskData = newTaskData.filter(data => data.projectId === currentProject.id);
+        // setSingleProjectTaskData(taskData);
+        setNewTask(false);
     }
+
+    const [editTask, setEditTask] = useState(false);
+    const handleEditTask = (e,data) => {
+        e.preventDefault();
+        setTempTaskData(data);
+        setEditTask(true);
+        //console.log("clicked");
+    }
+
+
+    const handelEditTaskSubmit = (e, id) => {
+        e.preventDefault();
+        console.log("clicked");
+        let taskDataN = newTaskData;
+        taskDataN[id - 1] = tempTaskData;
+        setNewTaskData(taskDataN);
+        setEditTask(false);
+    }
+
+    const handleDeleteTask = (e, data) => {
+        const deleteTaskData = newTaskData.filter(deleteTaka => deleteTaka.id !== data.id);
+        setNewTaskData(deleteTaskData); 
+    }
+
+
+
 
 
     return (
         <div>
-            <h1 className="text-center mt-5" >Project Management System </h1>
+            <div >
+                <h1 className="text-center mt-5"> <span style={{borderBottom:"3px solid black"}} > Project Management System </span>  </h1>
+            </div>
 
             {
                 singleProject ?
@@ -129,18 +160,39 @@ const ProjectHeader = () => {
                                     :
                                     (
                                         <>
-                                            <div className="text-center d-flex justify-content-center" >
-                                                <h2>Task List(<span style={{ color: "red" }} >{newTaskData.length}</span>)  </h2>
-                                                <button className="btn" onClick={(e) => handleNewTask(e)}  >  <FontAwesomeIcon icon={faPlus} /> <b>New Task</b></button>
+                                            {
+                                                editTask ?
+                                                    (
+                                                        <EditTaskForm
+                                                            tempTaskData={tempTaskData}
+                                                            handleNewTaskData={handleNewTaskData}
+                                                            handelEditTaskSubmit={handelEditTaskSubmit}
+                                                        ></EditTaskForm>
+                                                    )
+                                                    :
+                                                    (
+                                                        <>
+                                                            <div className="d-flex justify-content-center" >
+                                                                <div className="w-75" >
+                                                                    <h2 className="text-center mt-3" >{currentProject.project_name}(<span style={{ color: "red" }} >{newTaskData.length}</span>)  </h2>
+                                                                    <div className=" d-flex justify-content-end" >
+                                                                        <button className="btn btn-outline-primary mb-3" onClick={(e) => handleNewTask(e)}  >  <FontAwesomeIcon icon={faPlus} /> <b>New Task</b></button>
+                                                                    </div>
+                                                                    <TaskList
+                                                                        handleBack={handleBack}
+                                                                        newTaskData={newTaskData}
+                                                                        currentProject={currentProject}
+                                                                        // singleProjectTaskData={singleProjectTaskData}
+                                                                        handleEditTask={handleEditTask}
+                                                                        handleDeleteTask={handleDeleteTask}
+                                                                    >
 
-                                            </div>
-                                            <TaskList 
-                                                handleBack={handleBack}
-                                                newTaskData={newTaskData}
-                                                // currentProject={currentProject}
-                                             >
-
-                                            </TaskList>
+                                                                    </TaskList>
+                                                                </div>
+                                                            </div>
+                                                        </>
+                                                    )
+                                            }
                                         </>
                                     )
                             }
@@ -177,19 +229,24 @@ const ProjectHeader = () => {
                                                     :
                                                     (
                                                         <>
-                                                            <div className="text-center d-flex justify-content-center" >
-                                                                <h2>Project List(<span style={{ color: "red" }} >{newProjectData.length}</span>)  </h2>
-                                                                <button className="btn" onClick={(e) => handleNewProject(e)} >  <FontAwesomeIcon icon={faPlus} /> <b>New Project</b></button>
+                                                            <div className="d-flex justify-content-center" >
+                                                                <div className="w-75">
 
+                                                                    <h2 className="text-center mt-3" >Project List(<span style={{ color: "red" }} >{newProjectData.length}</span>)  </h2>
+                                                                    <div className=" d-flex justify-content-end " >
+                                                                        <button className="btn btn-outline-primary  mb-2" onClick={(e) => handleNewProject(e)} >  <FontAwesomeIcon icon={faPlus} /> <b>New Project</b></button>
+                                                                    </div>
+                                                                    <ProjectList
+                                                                        newProjectData={newProjectData}
+                                                                        handleEditProject={handleEditProject}
+                                                                        handleDeleteProject={handleDeleteProject}
+                                                                        handleSingleProject={handleSingleProject}
+                                                                        newTaskData={newTaskData}
+                                                                    >
+
+                                                                    </ProjectList>
+                                                                </div>
                                                             </div>
-                                                            <ProjectList
-                                                                newProjectData={newProjectData}
-                                                                handleEditProject={handleEditProject}
-                                                                handleDeleteProject={handleDeleteProject}
-                                                                handleSingleProject={handleSingleProject}
-                                                            >
-
-                                                            </ProjectList>
                                                         </>
                                                     )
                                             }

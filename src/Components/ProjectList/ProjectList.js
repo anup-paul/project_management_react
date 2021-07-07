@@ -17,7 +17,7 @@ const ProjectList = (props) => {
             <table class="table border mt-3">
                 <thead>
                     <tr>
-
+                        <th scope="col">S/N</th>
                         <th scope="col">Project Name</th>
                         <th scope="col">Assign To</th>
                         <th scope="col">Start Date</th>
@@ -29,8 +29,9 @@ const ProjectList = (props) => {
                 <tbody>
 
                     {
-                        newProjectData.map(data =>
+                        newProjectData.map((data, index) =>
                             <tr>
+                                <td>{index+1}.</td>
                                 <td
                                     onClick={(e) => handleSingleProject(e, data)}
                                 >

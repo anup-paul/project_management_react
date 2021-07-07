@@ -21,8 +21,8 @@ const TaskList = (props) => {
                 <table class="table  border">
                     <thead>
                         <tr>
-
-                            <th scope="col">Project Name</th>
+                            <th scope="col">S/N</th>
+                            <th scope="col">Task Name</th>
                             <th scope="col">Assign To</th>
                             <th scope="col">Start Date</th>
                             <th scope="col">End Date</th>
@@ -32,36 +32,37 @@ const TaskList = (props) => {
                     </thead>
                     <tbody>
 
-                    {
-                        taskData.map(data =>
-                            <tr>
-                                <td>{data.task_name}</td>
-                                <td>{data.task_assign_to}</td>
-                                <td>{data.task_start_date}</td>
-                                <td>{data.task_end_date}</td>
-                                <td ><FontAwesomeIcon
-                                    style={{color:"blue"}}
-                                    icon={faEdit }
-                                    onClick={(e)=>handleEditTask(e,data)}
+                        {
+                            taskData.map((data,index) =>
+                                <tr>
+                                    <td>{index + 1}</td>
+                                    <td>{data.task_name}</td>
+                                    <td>{data.task_assign_to}</td>
+                                    <td>{data.task_start_date}</td>
+                                    <td>{data.task_end_date}</td>
+                                    <td ><FontAwesomeIcon
+                                        style={{ color: "blue" }}
+                                        icon={faEdit}
+                                        onClick={(e) => handleEditTask(e, data)}
                                     />
-                                </td>
-                                <td > <FontAwesomeIcon  
-                                    style={{color:"red"}}  
-                                    icon={faTrashAlt}
-                                    onClick={(e)=>handleDeleteTask(e,data)}
+                                    </td>
+                                    <td > <FontAwesomeIcon
+                                        style={{ color: "red" }}
+                                        icon={faTrashAlt}
+                                        onClick={(e) => handleDeleteTask(e, data)}
                                     />
-                                </td>
-                            </tr>
-                        )
-                    }
+                                    </td>
+                                </tr>
+                            )
+                        }
 
 
-                </tbody>
+                    </tbody>
                 </table>
 
             </div>
             <div className="d-flex justify-content-end mt-5" >
-                <button className="btn btn-outline-primary" onClick={(e)=>handleBack(e)} > <FontAwesomeIcon   icon={faArrowAltCircleLeft} /> <b>Projects</b></button>
+                <button className="btn btn-outline-primary" onClick={(e) => handleBack(e)} > <FontAwesomeIcon icon={faArrowAltCircleLeft} /> <b>Projects</b></button>
             </div>
         </div>
     );

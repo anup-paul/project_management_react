@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
+import { TaskContext } from '../../App';
 
 
 const TaskList = (props) => {
 
+    // const [newTaskDataN, setNewTaskDataN] = useContext(TaskContext);
+
 
     const handleBack = props.handleBack;
-    // const singleProjectTaskData = props.singleProjectTaskData;
+    
     const newTaskData = props.newTaskData;
     const currentProject = props.currentProject;
-    const taskData = newTaskData.filter(data => data.projectId === currentProject.id);
-
+    const singleProjectTaskData = newTaskData.filter(data => data.projectId === currentProject.id);
+    // setNewTaskDataN(singleProjectTaskData);
+    // console.log(newTaskDataN);
     const handleEditTask = props.handleEditTask;
     const handleDeleteTask = props.handleDeleteTask;
 
@@ -33,7 +37,7 @@ const TaskList = (props) => {
                     <tbody>
 
                         {
-                            taskData.map((data,index) =>
+                            singleProjectTaskData.map((data,index) =>
                                 <tr>
                                     <td>{index + 1}</td>
                                     <td>{data.task_name}</td>

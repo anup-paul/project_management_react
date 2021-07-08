@@ -32,7 +32,9 @@ const EditProjectForm = (props) => {
                             <label for="exampleFormControlInput1" class="form-label">End date</label>
                             <input type="date" onChange={handleNewProjectData} value={tempProjectData.end_date} name="end_date" className="form-control" id="End_date105" placeholder="End date" />
                         </div>
-                        <button type="submit" onClick={(e) => handleSubmitEditProject(e, tempProjectData.id)} className="btn btn-outline-success">Update Project</button>
+                        <div className="d-flex justify-content-end" >
+                            <button type="submit" onClick={(e) => handleSubmitEditProject(e, tempProjectData.id)} className="btn btn-outline-success">Update Project</button>
+                        </div>
                     </form>
                 </div>
             </div>

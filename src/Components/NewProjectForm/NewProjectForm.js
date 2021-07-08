@@ -32,7 +32,9 @@ const NewProjectForm = (props) => {
                         <label for="exampleFormControlInput1" class="form-label">End date</label>
                         <input type="date" onBlur={handleNewProjectData} name="end_date" className="form-control" id="End_date105" placeholder="End date" />
                     </div>
-                    <button type="submit" onClick={(e) => handleNewProjectSubmit(e)} className="btn btn-outline-success">Add project</button>
+                    <div className="d-flex justify-content-end" >
+                        <button type="submit" onClick={(e) => handleNewProjectSubmit(e)} className="btn btn-outline-success d-flex justify-content-end">Add project</button>
+                    </div>
                 </form>
             </div>
         </div>

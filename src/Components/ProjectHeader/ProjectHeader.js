@@ -68,10 +68,12 @@ const ProjectHeader = () => {
 
     const [singleProject, setSingleProject] = useState(false);
     const [currentProject, setCurrentProject] = useState(null);
+    
     const handleSingleProject = (e, data) => {
         e.preventDefault();
         setSingleProject(true);
         setCurrentProject(data);
+        
         console.log("clicked: ", data);
     }
 
@@ -101,7 +103,8 @@ const ProjectHeader = () => {
     console.log(tempTaskData);
     console.log("checked:", newTaskData);
 
-    const [singleProjectTaskData, setSingleProjectTaskData] = useState([]);
+
+    // const [singleProjectTaskData, setSingleProjectTaskData] = useState([]);
     const handleNewTaskSubmit = (e) => {
         e.preventDefault();
         const addTaskData = newTaskData
@@ -111,6 +114,11 @@ const ProjectHeader = () => {
         // setSingleProjectTaskData(taskData);
         setNewTask(false);
     }
+
+   
+
+    
+
 
     const [editTask, setEditTask] = useState(false);
     const handleEditTask = (e,data) => {
@@ -155,6 +163,7 @@ const ProjectHeader = () => {
                                         <NewTaskForm
                                             handleNewTaskData={handleNewTaskData}
                                             handleNewTaskSubmit={handleNewTaskSubmit}
+                                            newProjectData={newProjectData}
                                         ></NewTaskForm>
                                     )
                                     :
@@ -167,6 +176,7 @@ const ProjectHeader = () => {
                                                             tempTaskData={tempTaskData}
                                                             handleNewTaskData={handleNewTaskData}
                                                             handelEditTaskSubmit={handelEditTaskSubmit}
+                                                            newProjectData={newProjectData}
                                                         ></EditTaskForm>
                                                     )
                                                     :

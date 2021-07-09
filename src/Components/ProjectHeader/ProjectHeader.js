@@ -74,7 +74,7 @@ const ProjectHeader = () => {
         setSingleProject(true);
         setCurrentProject(data);
         
-        console.log("clicked: ", data);
+        // console.log("clicked: ", data);
     }
 
 
@@ -89,26 +89,34 @@ const ProjectHeader = () => {
     const handleNewTask = (e) => {
         e.preventDefault(e);
         setNewTask(true);
-        console.log('Check Add Task')
+        // console.log('Check Add Task')
     }
 
 
     const [newTaskData, setNewTaskData] = useState([]);
     const [tempTaskData, setTempTaskData] = useState({})
     const handleNewTaskData = (e) => {
-        console.log(e.target.value);
+        // console.log(e.target.value);
         const { name, value } = e.target;
-        setTempTaskData({ ...tempTaskData, [name]: value });
+        if(name == 'projectId') {
+            const newValue = parseInt(value);
+            setTempTaskData({ ...tempTaskData, [name]: newValue });
+        }
+        else {
+            setTempTaskData({ ...tempTaskData, [name]: value });
+        }
+        // setTempTaskData({ ...tempTaskData, [name]: value });
     }
     console.log(tempTaskData);
-    console.log("checked:", newTaskData);
+    // console.log("checked:", newTaskData);
 
 
     // const [singleProjectTaskData, setSingleProjectTaskData] = useState([]);
     const handleNewTaskSubmit = (e) => {
         e.preventDefault();
+        console.log(tempTaskData);
         const addTaskData = newTaskData
-        addTaskData.push({ ...tempTaskData, id: addTaskData.length + 1, projectId: currentProject.id });
+        addTaskData.push({ ...tempTaskData, id: addTaskData.length + 1 });
         setNewTaskData(addTaskData);
         // const taskData = newTaskData.filter(data => data.projectId === currentProject.id);
         // setSingleProjectTaskData(taskData);
@@ -184,10 +192,10 @@ const ProjectHeader = () => {
                                                         <>
                                                             <div className="d-flex justify-content-center" >
                                                                 <div className="w-75" >
-                                                                    <h2 className="text-center mt-3" >{currentProject.project_name}(<span style={{ color: "red" }} >{newTaskData.length}</span>)  </h2>
+                                                                    {/* <h2 className="text-center mt-3" >{currentProject.project_name}(<span style={{ color: "red" }} >{newTaskData.length}</span>)  </h2>
                                                                     <div className=" d-flex justify-content-end" >
                                                                         <button className="btn btn-outline-primary mb-3" onClick={(e) => handleNewTask(e)}  >  <FontAwesomeIcon icon={faPlus} /> <b>New Task</b></button>
-                                                                    </div>
+                                                                    </div> */}
                                                                     <TaskList
                                                                         handleBack={handleBack}
                                                                         newTaskData={newTaskData}
@@ -195,6 +203,7 @@ const ProjectHeader = () => {
                                                                         // singleProjectTaskData={singleProjectTaskData}
                                                                         handleEditTask={handleEditTask}
                                                                         handleDeleteTask={handleDeleteTask}
+                                                                        handleNewTask={handleNewTask}
                                                                     >
 
                                                                     </TaskList>

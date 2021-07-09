@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import { TaskContext } from '../../App';
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 
 const TaskList = (props) => {
@@ -10,7 +11,7 @@ const TaskList = (props) => {
 
 
     const handleBack = props.handleBack;
-    
+
     const newTaskData = props.newTaskData;
     const currentProject = props.currentProject;
     const singleProjectTaskData = newTaskData.filter(data => data.projectId === currentProject.id);
@@ -18,9 +19,14 @@ const TaskList = (props) => {
     // console.log(newTaskDataN);
     const handleEditTask = props.handleEditTask;
     const handleDeleteTask = props.handleDeleteTask;
+    const handleNewTask = props.handleNewTask;
 
     return (
         <div>
+            <h2 className="text-center mt-3" >{currentProject.project_name}(<span style={{ color: "red" }} >{singleProjectTaskData.length}</span>)  </h2>
+            <div className=" d-flex justify-content-end" >
+                <button className="btn btn-outline-primary mb-3" onClick={(e) => handleNewTask(e)}  >  <FontAwesomeIcon icon={faPlus} /> <b>New Task</b></button>
+            </div>
             <div>
                 <table class="table  border">
                     <thead>
@@ -37,7 +43,7 @@ const TaskList = (props) => {
                     <tbody>
 
                         {
-                            singleProjectTaskData.map((data,index) =>
+                            singleProjectTaskData.map((data, index) =>
                                 <tr>
                                     <td>{index + 1}</td>
                                     <td>{data.task_name}</td>

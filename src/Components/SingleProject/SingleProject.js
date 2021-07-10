@@ -35,8 +35,14 @@ const SingleProject = (props) => {
             <td > <FontAwesomeIcon
                 style={{ color: "red" }}
                 icon={faTrashAlt}
-                onClick={() => handleDeleteProject(data)}
+                onClick={() => {
+                    if (window.confirm('Are you sure you want to delete this offer?')) {
+                        handleDeleteProject(data)
+                    }
+                }}
+
             />
+
             </td>
         </tr>
     );

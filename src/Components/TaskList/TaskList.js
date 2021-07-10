@@ -59,7 +59,11 @@ const TaskList = (props) => {
                                     <td > <FontAwesomeIcon
                                         style={{ color: "red" }}
                                         icon={faTrashAlt}
-                                        onClick={(e) => handleDeleteTask(e, data)}
+                                        onClick={(e) =>{
+                                            if (window.confirm('Are you sure you want to delete this offer?')) {
+                                                handleDeleteTask(e, data)
+                                            }
+                                        } }
                                     />
                                     </td>
                                 </tr>

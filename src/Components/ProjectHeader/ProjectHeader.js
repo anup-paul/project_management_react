@@ -61,6 +61,7 @@ const ProjectHeader = () => {
 
 
     const handleDeleteProject = (data) => {
+       
         const deleteProject = newProjectData.filter(deleteData => deleteData.id !== data.id);
         setNewProjectData(deleteProject);
     }

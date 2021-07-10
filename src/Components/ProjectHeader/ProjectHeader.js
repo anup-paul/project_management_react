@@ -192,10 +192,7 @@ const ProjectHeader = () => {
                                                         <>
                                                             <div className="d-flex justify-content-center" >
                                                                 <div className="w-75" >
-                                                                    {/* <h2 className="text-center mt-3" >{currentProject.project_name}(<span style={{ color: "red" }} >{newTaskData.length}</span>)  </h2>
-                                                                    <div className=" d-flex justify-content-end" >
-                                                                        <button className="btn btn-outline-primary mb-3" onClick={(e) => handleNewTask(e)}  >  <FontAwesomeIcon icon={faPlus} /> <b>New Task</b></button>
-                                                                    </div> */}
+                                                                   
                                                                     <TaskList
                                                                         handleBack={handleBack}
                                                                         newTaskData={newTaskData}

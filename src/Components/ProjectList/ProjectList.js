@@ -30,7 +30,8 @@ const ProjectList = (props) => {
                     {
                         newProjectData.map((data, index) =>
                             <SingleProject
-                                data={data} index={index}
+                                data={data}
+                                index={index}
                                 handleSingleProject={handleSingleProject}
                                 handleDeleteProject={handleDeleteProject}
                                 handleEditProject={handleEditProject}
